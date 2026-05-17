@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الأسهم - بورصة مسقط</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Rashi+Hebrew:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="page">
+        <section class="calculator-card">
+            <div class="header">
+
+                <div class="logo-wrap" aria-label="شعار الموقع">
+                    <svg class="site-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#22B14C"/>
+                                <stop offset="100%" stop-color="#008C45"/>
+                            </linearGradient>
+
+                            <linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#F2261E"/>
+                                <stop offset="100%" stop-color="#C90000"/>
+                            </linearGradient>
+
+                            <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#22B14C"/>
+                                <stop offset="100%" stop-color="#008C45"/>
+                            </linearGradient>
+
+                            <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+                                <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="rgba(0,0,0,0.18)"/>
+                            </filter>
+                        </defs>
+
+                        <g stroke-linecap="round" filter="url(#softShadow)">
+                            <line x1="35" y1="92" x2="35" y2="135" stroke="#C90000" stroke-width="4"/>
+                            <line x1="65" y1="72" x2="65" y2="132" stroke="#008C45" stroke-width="4"/>
+                            <line x1="95" y1="58" x2="95" y2="126" stroke="#C90000" stroke-width="4"/>
+                            <line x1="125" y1="42" x2="125" y2="116" stroke="#008C45" stroke-width="4"/>
+                            <line x1="155" y1="28" x2="155" y2="106" stroke="#008C45" stroke-width="4"/>
+                        </g>
+
+                        <g filter="url(#softShadow)">
+                            <rect x="25" y="103" width="20" height="22" rx="6" fill="url(#redGrad)"/>
+                            <rect x="55" y="83" width="20" height="32" rx="6" fill="url(#greenGrad)"/>
+                            <rect x="85" y="68" width="20" height="38" rx="6" fill="url(#redGrad)"/>
+                            <rect x="115" y="53" width="20" height="46" rx="6" fill="url(#greenGrad)"/>
+                            <rect x="145" y="38" width="20" height="54" rx="6" fill="url(#greenGrad)"/>
+                        </g>
+
+                        <g opacity="0.28">
+                            <rect x="29" y="106" width="5" height="12" rx="2.5" fill="#ffffff"/>
+                            <rect x="59" y="86" width="5" height="16" rx="2.5" fill="#ffffff"/>
+                            <rect x="89" y="72" width="5" height="18" rx="2.5" fill="#ffffff"/>
+                            <rect x="119" y="57" width="5" height="22" rx="2.5" fill="#ffffff"/>
+                            <rect x="149" y="42" width="5" height="26" rx="2.5" fill="#ffffff"/>
+                        </g>
+
+                        <path
+                            d="M28 142 C 54 132, 74 120, 95 102 C 116 84, 132 65, 150 43"
+                            fill="none"
+                            stroke="url(#arrowGrad)"
+                            stroke-width="12"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            filter="url(#softShadow)"
+                        />
+
+                        <path
+                            d="M145 43 L170 39 L157 61 Z"
+                            fill="url(#arrowGrad)"
+                            filter="url(#softShadow)"
+                        />
+                    </svg>
+                </div>
+
+                <h1>حاسبة الأسهم</h1>
+                <p class="subtitle">بورصة مسقط</p>
+            </div>
+
+            <div class="section-title">
+                <h2>حاسبة الربح والخسارة</h2>
+                <p>احسب صافي الربح أو الخسارة بعد عمولة الشراء والبيع.</p>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="shares">عدد الأسهم</label>
+                    <input type="number" id="shares" placeholder="مثال: 1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="buyPrice">سعر الشراء للسهم</label>
+                    <input type="number" id="buyPrice" step="0.001" placeholder="مثال: 0.120">
+                </div>
+
+                <div class="form-group">
+                    <label for="sellPrice">سعر البيع للسهم</label>
+                    <input type="number" id="sellPrice" step="0.001" placeholder="مثال: 0.135">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="halfCommission">
+                    <label for="halfCommission">
+                        احتساب نصف العمولة
+                        <span>للشراء والبيع في نفس الجلسة لبعض الشركات</span>
+                    </label>
+                </div>
+
+                <button onclick="calculateProfit()">احسب النتيجة</button>
+            </div>
+
+            <div id="result" class="result hidden">
+                <h2 id="resultTitle"></h2>
+
+                <div class="result-content">
+                    <div class="result-row">
+                        <span>مبلغ الشراء</span>
+                        <strong id="buyAmount"></strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>مبلغ البيع</span>
+                        <strong id="sellAmount"></strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>عمولة الشراء</span>
+                        <strong id="buyCommission"></strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>عمولة البيع</span>
+                        <strong id="sellCommission"></strong>
+                    </div>
+
+                    <div class="result-row total">
+                        <span>صافي الربح / الخسارة</span>
+                        <strong id="profitValue"></strong>
+                    </div>
+
+                    <div class="result-row total">
+                        <span>النسبة</span>
+                        <strong id="profitPercent"></strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-title">
+                <h2>حاسبة التطهير والتوافق الشرعي</h2>
+                <p>اختر الشركة لمعرفة هل هي متوافقة شرعًا وحساب مبلغ التطهير.</p>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="companySelect">الشركة</label>
+                    <select id="companySelect">
+                        <option value="">اختر الشركة</option>
+                    </select>
+                </div>
+
+                <button type="button" class="secondary-button" onclick="calculatePurification()">
+                    احسب التطهير والتوافق الشرعي
+                </button>
+            </div>
+
+            <div id="purificationResult" class="result purification-result hidden">
+                <h2 id="purificationTitle"></h2>
+
+                <div class="result-content">
+                    <div class="result-row">
+                        <span>رمز الشركة</span>
+                        <strong id="companyCode"></strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>اسم الشركة</span>
+                        <strong id="companyName"></strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>حالة التوافق الشرعي</span>
+                        <strong id="shariaStatus"></strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>نسبة التطهير لكل سهم</span>
+                        <strong id="purificationRatio"></strong>
+                    </div>
+
+                    <div class="result-row total">
+                        <span>مبلغ التطهير المطلوب</span>
+                        <strong id="purificationAmount"></strong>
+                    </div>
+                </div>
+
+                <p class="note">
+                    ملاحظة: مبلغ التطهير يعتمد على عدد الأسهم المدخل في أعلى الحاسبة.
+                </p>
+            </div>
+
+            <p class="disclaimer">
+                هذه البيانات مبنية على قائمة الشركات المتوافقة شرعًا ونسب التطهير للربع الرابع 2024.
+            </p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
